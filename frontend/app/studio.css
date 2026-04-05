@@ -1,0 +1,38 @@
+/* Append these to globals.css or import as a separate stylesheet */
+/* Field helpers for form elements throughout the studio */
+
+@layer components {
+  .field-label {
+    @apply block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wide;
+  }
+
+  .field-input {
+    @apply bg-secondary border border-border rounded-lg px-3 py-2 text-sm text-foreground
+           placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30
+           transition-colors;
+  }
+
+  .field-select {
+    @apply w-full bg-secondary border border-border rounded-lg px-3 py-2 text-sm text-foreground
+           focus:outline-none focus:ring-2 focus:ring-primary/30 cursor-pointer appearance-none;
+  }
+
+  .range-slider {
+    @apply w-full h-1.5 rounded-full appearance-none cursor-pointer;
+    background: linear-gradient(
+      to right,
+      hsl(262 83% 58%) 0%,
+      hsl(262 83% 58%) var(--progress, 50%),
+      hsl(222 32% 22%) var(--progress, 50%),
+      hsl(222 32% 22%) 100%
+    );
+  }
+  .range-slider::-webkit-slider-thumb {
+    @apply appearance-none w-4 h-4 rounded-full bg-white shadow cursor-pointer;
+    border: 2px solid hsl(262 83% 58%);
+  }
+  .range-slider::-moz-range-thumb {
+    @apply w-4 h-4 rounded-full bg-white cursor-pointer border-0;
+    border: 2px solid hsl(262 83% 58%);
+  }
+}

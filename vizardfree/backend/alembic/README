@@ -1,0 +1,3 @@
+# Alembic migrations for VizardFree
+# Run: alembic init alembic && alembic revision --autogenerate -m "init"
+# This file is a placeholder – DB is managed via SQLAlchemy create_all in database.py

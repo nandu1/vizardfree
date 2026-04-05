@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Fonts ────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* VizardFree Dark Theme */
+    --background: 222 47% 7%;
+    --foreground: 213 31% 91%;
+    --card: 222 40% 10%;
+    --card-foreground: 213 31% 91%;
+    --popover: 222 40% 10%;
+    --popover-foreground: 213 31% 91%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 32% 16%;
+    --secondary-foreground: 213 31% 91%;
+    --muted: 222 32% 16%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 32% 18%;
+    --input: 222 32% 18%;
+    --ring: 262 83% 58%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter), "Inter", system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(222 40% 10%);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(222 32% 28%);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(262 83% 58% / 0.6);
+  }
+}
+
+@layer components {
+  /* ── Sidebar ──────────────────────────────────────── */
+  .sidebar-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+           text-muted-foreground transition-all duration-150 cursor-pointer
+           hover:bg-secondary hover:text-foreground;
+  }
+  .sidebar-item.active {
+    @apply bg-primary/10 text-primary;
+  }
+
+  /* ── Cards ───────────────────────────────────────── */
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-sm border border-border rounded-xl;
+  }
+
+  /* ── Shimmer Skeleton ────────────────────────────── */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      hsl(222 40% 12%) 25%,
+      hsl(222 40% 18%) 50%,
+      hsl(222 40% 12%) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* ── Transcript word ─────────────────────────────── */
+  .transcript-word {
+    @apply inline-block px-0.5 py-0.5 rounded cursor-pointer
+           hover:bg-primary/20 transition-colors duration-100;
+  }
+  .transcript-word.active {
+    @apply bg-primary/30 text-primary-foreground;
+  }
+  .transcript-word.deleted {
+    @apply line-through text-muted-foreground opacity-50;
+  }
+
+  /* ── Video Ratio Preview ─────────────────────────── */
+  .ratio-card {
+    @apply relative cursor-pointer rounded-lg border-2 border-border
+           transition-all duration-200 overflow-hidden hover:border-primary/50;
+  }
+  .ratio-card.selected {
+    @apply border-primary shadow-[0_0_0_3px_hsl(262_83%_58%/0.2)];
+  }
+
+  /* ── Viral Score Badge ───────────────────────────── */
+  .viral-badge {
+    @apply inline-flex items-center gap-1 text-xs font-semibold
+           px-2 py-0.5 rounded-full;
+  }
+  .viral-badge.high   { @apply bg-green-500/20 text-green-400; }
+  .viral-badge.medium { @apply bg-amber-500/20 text-amber-400; }
+  .viral-badge.low    { @apply bg-red-500/20 text-red-400; }
+
+  /* ── Timeline ────────────────────────────────────── */
+  .timeline-track {
+    @apply relative h-12 bg-secondary rounded-lg overflow-hidden;
+  }
+  .timeline-playhead {
+    @apply absolute top-0 bottom-0 w-0.5 bg-primary z-10
+           pointer-events-none;
+  }
+
+  /* ── Waveform container ──────────────────────────── */
+  #waveform wave {
+    overflow: hidden !important;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #7C3AED, #06B6D4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 24px hsl(262 83% 58% / 0.3);
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* ── Devanagari text support ─────────────────────────────────────────── */
+.font-devanagari {
+  font-family: "Noto Sans Devanagari", sans-serif;
+}
+
+/* ── WaveSurfer override ─────────────────────────────────────────────── */
+.waveform-container canvas {
+  border-radius: 6px;
+}

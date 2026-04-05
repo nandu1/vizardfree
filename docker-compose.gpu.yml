@@ -1,0 +1,30 @@
+# docker-compose.gpu.yml
+# Use this file alongside docker-compose.yml for NVIDIA GPU support:
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d
+
+version: "3.9"
+
+services:
+  backend:
+    environment:
+      - WHISPER_DEVICE=cuda
+      - WHISPER_COMPUTE_TYPE=float16
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  worker:
+    environment:
+      - WHISPER_DEVICE=cuda
+      - WHISPER_COMPUTE_TYPE=float16
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
